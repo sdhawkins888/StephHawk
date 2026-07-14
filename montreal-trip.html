@@ -1,0 +1,1253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Montréal, en famille — Plateau Home Base</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#EAF0E2;
+    --bg-deep:#DEE8D3;
+    --card:#FFFFFF;
+    --ink:#1F3A54;
+    --ink-soft:#4C6478;
+    --teal:#2E7D6B;
+    --teal-deep:#215A4E;
+    --marigold:#E3A23C;
+    --coral:#D65B4A;
+    --line:#c7d4bb;
+    --orange-line:#D9622B;
+    --green-line:#1E8A5B;
+    --yellow-line:#E0B400;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Public Sans', system-ui, sans-serif;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,h4{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    margin:0 0 .3em 0;
+    color:var(--ink);
+  }
+  .mono{font-family:'IBM Plex Mono', monospace;}
+  a{color:var(--teal-deep);}
+
+  /* ---- Hero ---- */
+  .hero{
+    padding:64px 24px 40px;
+    text-align:center;
+    background:
+      radial-gradient(circle at 15% 20%, rgba(227,162,60,0.18), transparent 40%),
+      radial-gradient(circle at 85% 10%, rgba(214,91,74,0.14), transparent 45%),
+      var(--bg);
+    border-bottom:2px solid var(--line);
+  }
+  .hero .eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    font-size:.72rem;
+    color:var(--teal-deep);
+    margin-bottom:14px;
+  }
+  .hero h1{
+    font-size:clamp(2.1rem, 5vw, 3.6rem);
+    font-optical-sizing:auto;
+    max-width:820px;
+    margin:0 auto 12px;
+  }
+  .hero p.sub{
+    max-width:560px;
+    margin:0 auto;
+    color:var(--ink-soft);
+    font-size:1.05rem;
+  }
+  .home-chip{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    margin-top:22px;
+    background:var(--card);
+    border:1.5px solid var(--teal);
+    border-radius:999px;
+    padding:8px 18px;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:.82rem;
+    color:var(--teal-deep);
+  }
+
+  .host-card{
+    max-width:640px;
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:18px 22px;
+    text-align:left;
+  }
+  .quick-ref-row{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:18px;
+    margin-top:26px;
+  }
+  .quick-ref-row .host-card{margin-top:0; flex:1 1 300px;}
+  .host-card h4{
+    font-size:.8rem;
+    text-transform:uppercase;
+    letter-spacing:.06em;
+    color:var(--teal-deep);
+    font-family:'Public Sans',sans-serif;
+    font-weight:700;
+    margin-bottom:12px;
+  }
+  .host-card dl{
+    display:grid;
+    grid-template-columns:auto 1fr;
+    gap:6px 16px;
+    margin:0;
+  }
+  .host-card dt{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:.78rem;
+    color:var(--ink-soft);
+    white-space:nowrap;
+  }
+  .host-card dd{margin:0; font-size:.92rem;}
+
+  /* ---- Metro line day-nav ---- */
+  .metro-nav{
+    position:sticky; top:0; z-index:50;
+    background:var(--ink);
+    padding:14px 10px;
+    overflow-x:auto;
+    white-space:nowrap;
+  }
+  .metro-track{
+    position:relative;
+    display:inline-flex;
+    align-items:center;
+    min-width:100%;
+    padding:0 20px;
+  }
+  .metro-track::before{
+    content:"";
+    position:absolute; left:20px; right:20px; top:7px;
+    height:3px; background:var(--marigold);
+    z-index:0;
+  }
+  .metro-stop{
+    position:relative; z-index:1;
+    display:inline-flex; flex-direction:column; align-items:center;
+    text-decoration:none;
+    padding:0 16px;
+    color:#fff;
+  }
+  .metro-stop .dot{
+    width:14px;height:14px;border-radius:50%;
+    background:var(--marigold);
+    border:3px solid var(--ink);
+    margin-bottom:6px;
+  }
+  .metro-stop span.day{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:.68rem;
+    letter-spacing:.05em;
+    text-transform:uppercase;
+    opacity:.85;
+  }
+  .metro-stop span.label{
+    font-size:.78rem;
+    font-weight:600;
+    max-width:88px;
+    text-align:center;
+    white-space:normal;
+  }
+  .metro-stop:hover .dot{background:var(--coral);}
+
+  section{
+    max-width:940px;
+    margin:0 auto;
+    padding:56px 24px;
+  }
+  section.alt{background:var(--bg-deep);}
+  .section-head{
+    display:flex; align-items:baseline; gap:14px; margin-bottom:6px;
+    flex-wrap:wrap;
+  }
+  .section-head .idx{
+    font-family:'IBM Plex Mono',monospace;
+    color:var(--teal);
+    font-size:.85rem;
+  }
+  .section-sub{color:var(--ink-soft); margin-bottom:32px; max-width:640px;}
+
+  /* ---- Bearings grid ---- */
+  .bearings-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+    gap:18px;
+  }
+  .bearing-card{
+    background:var(--card);
+    border-radius:14px;
+    padding:18px 20px;
+    border:1px solid var(--line);
+  }
+  .bearing-card h4{
+    font-size:.95rem;
+    text-transform:uppercase;
+    letter-spacing:.04em;
+    color:var(--teal-deep);
+    font-family:'Public Sans',sans-serif;
+    font-weight:700;
+    margin-bottom:10px;
+  }
+  .bearing-card ul{list-style:none; margin:0; padding:0;}
+  .bearing-card li{
+    display:flex; justify-content:space-between; gap:10px;
+    padding:6px 0;
+    border-bottom:1px dashed var(--line);
+    font-size:.9rem;
+  }
+  .bearing-card li:last-child{border-bottom:none;}
+  .walk{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:.78rem;
+    color:var(--coral);
+    white-space:nowrap;
+  }
+
+  /* ---- Day sections ---- */
+  .day-card{
+    background:var(--card);
+    border-radius:18px;
+    border:1px solid var(--line);
+    padding:28px 26px;
+    margin-bottom:20px;
+  }
+  .day-tag{
+    display:inline-block;
+    background:var(--ink);
+    color:#fff;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:.72rem;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    padding:5px 12px;
+    border-radius:6px;
+    margin-bottom:10px;
+  }
+  .timeline{margin-top:20px;}
+  .t-row{
+    display:grid;
+    grid-template-columns:74px 1fr;
+    gap:16px;
+    padding:12px 0;
+    border-top:1px solid var(--line);
+  }
+  .t-row:first-child{border-top:none;}
+  .t-time{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:.82rem;
+    color:var(--teal-deep);
+    font-weight:500;
+    padding-top:2px;
+  }
+  .t-body h4{font-size:1rem; margin-bottom:4px;}
+  .t-body p{margin:.2em 0; color:var(--ink-soft); font-size:.93rem;}
+  .badge{
+    display:inline-block;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:.72rem;
+    padding:2px 8px;
+    border-radius:5px;
+    margin:2px 6px 2px 0;
+  }
+  .badge.orange{background:rgba(217,98,43,.13); color:var(--orange-line);}
+  .badge.green{background:rgba(30,138,91,.13); color:var(--green-line);}
+  .badge.yellow{background:rgba(224,180,0,.15); color:#8a6c00;}
+  .badge.walk{background:rgba(46,125,107,.12); color:var(--teal-deep);}
+  .options{
+    background:var(--bg);
+    border-radius:10px;
+    padding:10px 14px;
+    margin-top:8px;
+  }
+  .options p{margin:4px 0; font-size:.88rem;}
+  .kid-tip{
+    background:#FBEFE0;
+    border-left:3px solid var(--marigold);
+    padding:10px 14px;
+    border-radius:0 8px 8px 0;
+    font-size:.88rem;
+    margin-top:10px;
+    color:#6b4d1c;
+  }
+  .note{
+    background:#FCEAE6;
+    border-left:3px solid var(--coral);
+    padding:10px 14px;
+    border-radius:0 8px 8px 0;
+    font-size:.88rem;
+    margin-top:10px;
+    color:#7a2e22;
+  }
+
+  /* recs page */
+  .recs-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:18px;
+  }
+  .rec-card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:18px 20px;
+  }
+  .rec-card h4{font-size:1rem; margin-bottom:6px;}
+  .rec-card p{font-size:.88rem; color:var(--ink-soft); margin:0;}
+  .rec-card .walk{display:block; margin-top:8px;}
+
+  .recs-group{margin-bottom:38px;}
+  .recs-group:last-child{margin-bottom:0;}
+  .recs-group-head{
+    display:flex; align-items:baseline; gap:10px;
+    margin-bottom:16px;
+  }
+  .recs-group-head h3{
+    font-family:'Fraunces',serif;
+    font-size:1.25rem;
+    margin:0;
+    color:var(--ink);
+  }
+  .recs-group-head .count{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:.78rem;
+    color:var(--ink-soft);
+  }
+  .rec-tags{
+    display:flex; flex-wrap:wrap; gap:6px;
+    margin-bottom:10px;
+  }
+  .tag{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:.68rem;
+    text-transform:uppercase;
+    letter-spacing:.03em;
+    padding:2px 8px;
+    border-radius:5px;
+    font-weight:600;
+  }
+  .tag-attraction{background:rgba(46,125,107,.13); color:var(--teal-deep);}
+  .tag-shop{background:rgba(227,162,60,.18); color:#8a5c11;}
+  .tag-food{background:rgba(214,91,74,.15); color:#a13d2c;}
+  .tag-dist, .tag-neigh{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:.68rem;
+    padding:2px 8px;
+    border-radius:5px;
+    background:var(--bg-deep);
+    color:var(--ink-soft);
+  }
+
+  .map-figure{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:16px;
+    padding:18px;
+    margin:22px 0;
+  }
+  .map-figure svg{width:100%; height:auto; display:block; border-radius:10px;}
+  .map-figure .leaflet-map{width:100%; height:340px; border-radius:10px; background:#DEE8D3; z-index:0;}
+  .map-figure .leaflet-popup-content{font-family:'Public Sans', sans-serif; font-size:.85rem;}
+  .stop-icon{
+    background:var(--marigold);
+    color:#1F3A54;
+    border-radius:50%;
+    width:26px; height:26px;
+    display:flex; align-items:center; justify-content:center;
+    font-family:'IBM Plex Mono',monospace; font-weight:700; font-size:.8rem;
+    border:2px solid #fff;
+    box-shadow:0 1px 4px rgba(0,0,0,.3);
+  }
+  .stop-icon.endpoint{background:#1F3A54; color:#fff;}
+  .map-figure iframe{width:100%; height:340px; border:0; border-radius:10px; display:block;}
+  .map-figure figcaption{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:.78rem;
+    color:var(--ink-soft);
+    margin-top:10px;
+    text-align:center;
+  }
+
+  footer{
+    text-align:center;
+    padding:40px 24px 60px;
+    color:var(--ink-soft);
+    font-size:.85rem;
+  }
+
+  @media (max-width:640px){
+    section{padding:40px 18px;}
+    .day-card{padding:20px 16px;}
+    .t-row{grid-template-columns:60px 1fr;}
+  }
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+</head>
+<body>
+
+<div class="hero">
+  <div class="eyebrow">7 Days · Plateau-Mont-Royal, Montréal</div>
+  <h1>Montréal, en famille</h1>
+  <p class="sub">Your day-by-day home base guide — Sunday arrival to Saturday flight home. Built around 4300 Av. Laval, with real walking distances so you know exactly what's close.</p>
+  <div class="home-chip">🏠 Home base: <a href="https://www.google.com/maps/search/?api=1&query=45.520939,-73.581296" target="_blank" rel="noopener">4300 Avenue Laval</a>, Plateau-Mont-Royal</div>
+
+  <div class="quick-ref-row">
+    <div class="host-card">
+      <h4>House &amp; Host — Quick Reference</h4>
+      <dl>
+        <dt>Exchange partner</dt><dd>Claire Maréchal</dd>
+        <dt>Phone</dt><dd><a href="tel:+15148856421">+1 514-885-6421</a></dd>
+        <dt>Email</dt><dd><a href="mailto:clairemarechal@gmail.com">clairemarechal@gmail.com</a></dd>
+        <dt>Address</dt><dd><a href="https://www.google.com/maps/search/?api=1&query=45.520939,-73.581296" target="_blank" rel="noopener">4300 Avenue Laval, Montréal, QC, Canada</a></dd>
+      </dl>
+    </div>
+
+    <div class="host-card">
+      <h4>Flights — Quick Reference</h4>
+      <dl>
+        <dt>Outbound</dt><dd>Air Canada AC8674 — RDU 9:40am → YUL 11:51am (local times)</dd>
+        <dt>Return</dt><dd>Air Canada AC8671 — YUL 1:10pm → RDU 3:25pm (local times)</dd>
+        <dt>Confirmation</dt><dd>C6G39T</dd>
+      </dl>
+    </div>
+  </div>
+</div>
+
+<nav class="metro-nav" aria-label="Day navigator">
+  <div class="metro-track">
+    <a class="metro-stop" href="#bearings"><span class="dot"></span><span class="day">Start</span><span class="label">Bearings</span></a>
+    <a class="metro-stop" href="#sun"><span class="dot"></span><span class="day">Sun</span><span class="label">Arrival</span></a>
+    <a class="metro-stop" href="#mon"><span class="dot"></span><span class="day">Mon</span><span class="label">Old Montréal</span></a>
+    <a class="metro-stop" href="#tue"><span class="dot"></span><span class="day">Tue</span><span class="label">Biodôme</span></a>
+    <a class="metro-stop" href="#wed"><span class="dot"></span><span class="day">Wed</span><span class="label">Jean-Drapeau</span></a>
+    <a class="metro-stop" href="#thu"><span class="dot"></span><span class="day">Thu</span><span class="label">Plateau Stroll</span></a>
+    <a class="metro-stop" href="#fri"><span class="dot"></span><span class="day">Fri</span><span class="label">Easy + Pack</span></a>
+    <a class="metro-stop" href="#sat"><span class="dot"></span><span class="day">Sat</span><span class="label">Fly Home</span></a>
+    <a class="metro-stop" href="#recs"><span class="dot"></span><span class="day">Bonus</span><span class="label">Recs &amp; Links</span></a>
+  </div>
+</nav>
+
+<!-- ============ BEARINGS ============ -->
+<section id="bearings">
+  <div class="section-head"><span class="idx">00</span><h2>Getting Your Bearings: The Plateau</h2></div>
+  <p class="section-sub">Everything below is measured as real walking distance from <strong><a href="https://www.google.com/maps/search/?api=1&query=45.520939,-73.581296" target="_blank" rel="noopener">4300 Av. Laval</a></strong>, at a slow, kid-paced stroll (~70m/min — roomier than Google's default adult pace). Treat these as close estimates, not exact — worth double-checking on a map app once you're there, especially for anything under 5 minutes, since a stroller vs. tired-legs pace changes things.</p>
+
+  <div class="bearings-grid">
+    <div class="bearing-card">
+      <h4>🚇 Metro entrances</h4>
+      <ul>
+        <li><a href="https://www.google.com/maps/search/?api=1&query=45.5245931,-73.5816611" target="_blank" rel="noopener">Mont-Royal (Orange line)</a> <span class="walk">6 min</span></li>
+        <li><a href="https://www.google.com/maps/search/?api=1&query=45.5183077,-73.568226" target="_blank" rel="noopener">Sherbrooke (Orange line)</a> <span class="walk">15 min</span></li>
+      </ul>
+    </div>
+    <div class="bearing-card">
+      <h4>🌳 Parks</h4>
+      <ul>
+        <li><a href="https://www.google.com/maps/search/?api=1&query=45.5252775,-73.5695379" target="_blank" rel="noopener">Parc La Fontaine</a> (nearest edge) <span class="walk">2 min</span></li>
+        <li><a href="https://www.google.com/maps/search/?api=1&query=45.5252775,-73.5695379" target="_blank" rel="noopener">Parc La Fontaine</a> (ponds &amp; playgrounds, via Rachel entrance) <span class="walk">~5–10 min</span></li>
+        <li><a href="https://www.google.com/maps/search/?api=1&query=45.5252775,-73.5695379" target="_blank" rel="noopener">Parc La Fontaine</a> wading pools <span class="walk">closed this season</span></li>
+        <li><a href="https://www.google.com/maps/search/?api=1&query=45.5124464,-73.5330319" target="_blank" rel="noopener">Parc Jean-Drapeau</a> / <a href="https://www.google.com/maps/search/?api=1&query=45.4985211,-73.5229356" target="_blank" rel="noopener">Jean-Doré Beach</a> <span class="walk">metro + shuttle</span></li>
+      </ul>
+    </div>
+    <div class="bearing-card">
+      <h4>🛒 Groceries</h4>
+      <ul>
+        <li><a href="https://www.google.com/maps/search/?api=1&query=45.5207512,-73.576463" target="_blank" rel="noopener">Marché Kaïa</a> (great produce, int'l) <span class="walk">5 min</span></li>
+        <li><a href="https://www.google.com/maps/search/?api=1&query=45.521119,-73.585753" target="_blank" rel="noopener">InterMarché Universel</a> <span class="walk">5 min</span></li>
+        <li><a href="https://www.google.com/maps/search/?api=1&query=45.519084,-73.586759" target="_blank" rel="noopener">Maxi</a> (biggest, best for a real stock-up) <span class="walk">7 min</span></li>
+        <li><a href="https://www.google.com/maps/search/?api=1&query=45.5168692,-73.5788495" target="_blank" rel="noopener">Segal's Market</a> (bulk, cheap) <span class="walk">7 min</span></li>
+        <li><a href="https://www.google.com/maps/search/?api=1&query=45.5274528,-73.5795333" target="_blank" rel="noopener">Intermarché Boyer</a> (open till 11pm) <span class="walk">11 min</span></li>
+      </ul>
+    </div>
+    <div class="bearing-card">
+      <h4>🧸 Toy stores</h4>
+      <ul>
+        <li><a href="https://www.google.com/maps/search/?api=1&query=45.523281,-73.581742" target="_blank" rel="noopener">Le Valet d'Cœur</a> (games, puzzles, gifts) <span class="walk">4 min</span></li>
+        <li><a href="https://www.google.com/maps/search/?api=1&query=45.5194704,-73.5771847" target="_blank" rel="noopener">Grande Ourse</a> (Waldorf/wooden toys) <span class="walk">5 min</span></li>
+        <li><a href="https://www.google.com/maps/search/?api=1&query=45.529603,-73.577477" target="_blank" rel="noopener">Ojeux</a> (gifts, toys) <span class="walk">14 min</span></li>
+        <li><a href="https://www.google.com/maps/search/?api=1&query=45.5305693,-73.5764143" target="_blank" rel="noopener">Joubec</a> (board/card games) <span class="walk">16 min</span></li>
+      </ul>
+    </div>
+    <div class="bearing-card">
+      <h4>🍦 Ice cream &amp; sweets</h4>
+      <ul>
+        <li><a href="https://www.google.com/maps/search/?api=1&query=45.5234085,-73.582053" target="_blank" rel="noopener">Chocolats Andrée</a> <span class="walk">4 min</span></li>
+        <li><a href="https://www.google.com/maps/search/?api=1&query=45.5205777,-73.5861985" target="_blank" rel="noopener">Mont Éclair</a> (pastries) <span class="walk">5 min</span></li>
+        <li><a href="https://www.google.com/maps/search/?api=1&query=45.5215567,-73.5848916" target="_blank" rel="noopener">Le Blueboy</a> (soft serve, sundaes) <span class="walk">4 min</span></li>
+        <li><a href="https://www.google.com/maps/search/?api=1&query=45.5199381,-73.5735978" target="_blank" rel="noopener">Unicone</a> (global flavors) <span class="walk">9 min</span></li>
+      </ul>
+    </div>
+    <div class="bearing-card">
+      <h4>☕ Coffee</h4>
+      <ul>
+        <li><a href="https://www.google.com/maps/search/?api=1&query=45.5260495,-73.5808193" target="_blank" rel="noopener">Ciao Amore Café</a> <span class="walk">8 min</span></li>
+        <li><a href="https://www.google.com/maps/search/?api=1&query=45.5196182,-73.5865787" target="_blank" rel="noopener">Café Myriade</a> <span class="walk">6 min</span></li>
+        <li><a href="https://www.google.com/maps/search/?api=1&query=45.5202377,-73.5799072" target="_blank" rel="noopener">Café chez Téta</a> (Lebanese, closed Mon/Tue) <span class="walk">2 min</span></li>
+      </ul>
+    </div>
+    <div class="bearing-card">
+      <h4>📚 Bookstores &amp; boutiques</h4>
+      <ul>
+        <li><a href="https://www.google.com/maps/search/?api=1&query=45.5226479,-73.5842132" target="_blank" rel="noopener">Librairie Le Port de tête</a> (kids' section) <span class="walk">4 min</span></li>
+        <li><a href="https://www.google.com/maps/search/?api=1&query=45.5203464,-73.5764506" target="_blank" rel="noopener">Librairie De Stiil</a> <span class="walk">5 min</span></li>
+        <li><a href="https://www.google.com/maps/search/?api=1&query=45.5254644,-73.5818584" target="_blank" rel="noopener">Librairie l'Échange</a> (used books) <span class="walk">7 min</span></li>
+      </ul>
+    </div>
+    <div class="bearing-card">
+      <h4>🚶 Pedestrian streets</h4>
+      <ul>
+        <li><a href="https://www.google.com/maps/search/?api=1&query=Avenue%20du%20Mont-Royal%2C%20Montreal" target="_blank" rel="noopener">Av. Mont-Royal</a> (western stretch) <span class="walk">6–8 min</span></li>
+        <li><a href="https://www.google.com/maps/search/?api=1&query=Avenue%20Duluth%20Est%2C%20Montreal" target="_blank" rel="noopener">Av. Duluth E.</a> (Saint-Laurent–Saint-Hubert) <span class="walk">7 min</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <figure class="map-figure">
+    <div id="map-bearings" class="leaflet-map"></div>
+    <figcaption>Real interactive map — drag, zoom, and tap any pin for details.</figcaption>
+  </figure>
+</section>
+
+<!-- ============ SUNDAY ============ -->
+<section class="alt" id="sun">
+  <div class="day-card">
+    <span class="day-tag">Sunday · Arrival</span>
+    <h2>Landing &amp; Getting Settled</h2>
+    <p class="section-sub">Goal for today: low-key. You're jet-lagged, luggage-laden, and the kids have been sitting still all morning. Nothing needs to be impressive today.</p>
+
+    <div class="timeline">
+      <div class="t-row">
+        <div class="t-time">11:51</div>
+        <div class="t-body">
+          <h4>Land at <a href="https://www.google.com/maps/search/?api=1&query=Montreal-Trudeau%20Airport%20YUL" target="_blank" rel="noopener">YUL</a></h4>
+          <p>Air Canada AC8674 from Raleigh-Durham. Budget 45–60 min for deplaning, customs, and bags with two small kids.</p>
+        </div>
+      </div>
+      <div class="t-row">
+        <div class="t-time">~1:00</div>
+        <div class="t-body">
+          <h4>Get to <a href="https://www.google.com/maps/search/?api=1&query=45.520939,-73.581296" target="_blank" rel="noopener">4300 Av. Laval</a></h4>
+          <p><span class="badge orange">Taxi/rideshare</span> ~25–30 min direct, roughly $45–55 CAD — the easy call with luggage and tired kids.</p>
+          <p><span class="badge green">747 Bus + Metro</span> ~55–70 min, cheaper but a transfer at <a href="https://www.google.com/maps/search/?api=1&query=45.5152,-73.5605" target="_blank" rel="noopener">Berri-UQAM</a> and stairs with bags. Only if you're feeling energetic.</p>
+        </div>
+      </div>
+      <div class="t-row">
+        <div class="t-time">1:00</div>
+        <div class="t-body">
+          <h4>Arrive, unpack, look around the house</h4>
+          <p>Let the kids explore their room and claim spaces. No agenda.</p>
+        </div>
+      </div>
+      <div class="t-row">
+        <div class="t-time">1:15–2:30</div>
+        <div class="t-body">
+          <h4>First meal in Montréal</h4>
+          <div class="options">
+            <p><strong><a href="https://www.google.com/maps/search/?api=1&query=45.5202377,-73.5799072" target="_blank" rel="noopener">Café chez Téta</a></strong> (2 min) — Lebanese manouche &amp; wraps, casual, quick. Sunday hours 9–5.</p>
+            <p><strong><a href="https://www.google.com/maps/search/?api=1&query=45.5264899,-73.580349" target="_blank" rel="noopener">Notre-Bœuf-de-Grâce</a></strong> (9 min) — family-friendly burgers, lots of room, open till 11pm.</p>
+            <p><strong><a href="https://www.google.com/maps/search/?api=1&query=45.526695,-73.580273" target="_blank" rel="noopener">L'Avenue</a></strong> (9 min) — beloved brunch spot, huge portions, but expect a wait on a Sunday.</p>
+            <p><strong>Order in</strong> — if the flight wiped everyone out, staying home with delivery is a completely fine call today.</p>
+          </div>
+        </div>
+      </div>
+      <div class="t-row">
+        <div class="t-time">2:45–4:00</div>
+        <div class="t-body">
+          <h4>Grocery run</h4>
+          <div class="options">
+            <p><strong><a href="https://www.google.com/maps/search/?api=1&query=45.519084,-73.586759" target="_blank" rel="noopener">Maxi</a></strong> (7 min) — biggest selection, best for a real stock-up week of groceries.</p>
+            <p><strong><a href="https://www.google.com/maps/search/?api=1&query=45.521119,-73.585753" target="_blank" rel="noopener">InterMarché Universel</a></strong> (5 min) — closer, good for a quicker top-up.</p>
+            <p><strong><a href="https://www.google.com/maps/search/?api=1&query=45.5207512,-73.576463" target="_blank" rel="noopener">Marché Kaïa</a></strong> (5 min) — smaller, great produce, nice if you just need basics.</p>
+          </div>
+        </div>
+      </div>
+      <div class="t-row">
+        <div class="t-time">4:00–5:00</div>
+        <div class="t-body">
+          <h4>Unpack groceries, downtime</h4>
+          <p>Let energy levels tell you what's next — this is a natural spot for quiet time or a nap if anyone needs it.</p>
+        </div>
+      </div>
+      <div class="t-row">
+        <div class="t-time">5:00–6:15</div>
+        <div class="t-body">
+          <h4><a href="https://www.google.com/maps/search/?api=1&query=45.5252775,-73.5695379" target="_blank" rel="noopener">Parc La Fontaine</a> <span class="badge walk">2 min walk</span></h4>
+          <p><strong>How to get there:</strong> out your door, head east toward Rachel or Marie-Anne (your block sits between the two) and cross into the park at its nearest edge — you'll see it as soon as you turn the corner. The park's full boundaries are Rachel to the north, Sherbrooke to the south, Avenue du Parc-La Fontaine to the west, and Papineau to the east, so you're entering somewhere along that western edge.</p>
+          <p><strong>Once you're in:</strong> the park is built around two connected artificial ponds with a fountain and small waterfall between them — lovely for a stroll, and a real draw for birdwatching in summer (keep an eye out for the park's resident European starlings). A walking/bike path loops the perimeter. For the kids specifically, head toward <strong><a href="https://www.google.com/maps/search/?api=1&query=Rue%20Rachel%20Montreal" target="_blank" rel="noopener">Rachel Street</a></strong>: the park has two large playgrounds split by the Rachel St. entrance at Calixa-Lavallée, so that's the natural spot to let them loose. There are also tennis courts and the open-air <strong><a href="https://www.google.com/maps/search/?api=1&query=Th%C3%A9%C3%A2tre%20de%20Verdure%20Parc%20La%20Fontaine%20Montreal" target="_blank" rel="noopener">Théâtre de Verdure</a></strong>, which sometimes runs free family-friendly shows in summer — worth a quick check of what's on while you're there.</p>
+          <div class="note">Heads up: the two wading pools near Rue Rachel Est are closed for the season this year for equipment replacement, so the splash-pad option isn't available at La Fontaine — worth knowing before you promise it to the kids. The nearest real alternative is <a href="https://www.google.com/maps/search/?api=1&query=45.5240226,-73.5927342" target="_blank" rel="noopener">St. Michael Park</a> in Mile End (~14 min walk), which has its own splash pad and playground.</div>
+          <figure class="map-figure">
+            <div id="map-lafontaine" class="leaflet-map"></div>
+            <figcaption>Home → <a href="https://www.google.com/maps/search/?api=1&query=45.5252775,-73.5695379" target="_blank" rel="noopener">Parc La Fontaine</a>, straight out the door.</figcaption>
+          </figure>
+        </div>
+      </div>
+      <div class="t-row">
+        <div class="t-time">6:30</div>
+        <div class="t-body">
+          <h4>Dinner</h4>
+          <div class="options">
+            <p><strong>Cook from the groceries</strong> — simplest option after a travel day.</p>
+            <p><strong>Pizza delivery</strong> — zero effort, kid-approved.</p>
+            <p><strong><a href="https://www.google.com/maps/search/?api=1&query=45.5253231,-73.5748058" target="_blank" rel="noopener">La Banquise</a></strong> (10 min, open 24 hrs) — if anyone still has energy to go out, it's an easy first taste of poutine.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="kid-tip">Kid-tolerance note: this is intentionally the lightest day. One outing (the park), everything else within a few minutes of the house.</div>
+  </div>
+</section>
+
+<!-- ============ MONDAY ============ -->
+<section id="mon">
+  <div class="day-card">
+    <span class="day-tag">Monday · <a href="https://www.google.com/maps/search/?api=1&query=45.5062351,-73.5596853" target="_blank" rel="noopener">Old Montréal</a> &amp; <a href="https://www.google.com/maps/search/?api=1&query=45.5087444,-73.5488449" target="_blank" rel="noopener">Old Port</a></span>
+    <h2>Notre-Dame, Street Performers &amp; the Ferris Wheel</h2>
+    <p class="section-sub">Old Montréal is the cobblestone core of the city — architecture here dates as far back as 1685, making it one of the oldest continuously built-up neighborhoods in North America.</p>
+    <div class="timeline">
+      <div class="t-row">
+        <div class="t-time">7:30</div>
+        <div class="t-body"><h4>Breakfast at home</h4></div>
+      </div>
+      <div class="t-row">
+        <div class="t-time">8:45</div>
+        <div class="t-body">
+          <h4>Head out <span class="badge orange">Orange Line</span></h4>
+          <p>Walk 6 min to <a href="https://www.google.com/maps/search/?api=1&query=45.5245931,-73.5816611" target="_blank" rel="noopener">Mont-Royal metro</a>. Take the Orange line toward Angrignon (southbound) — no transfer needed. Get off at <strong><a href="https://www.google.com/maps/search/?api=1&query=45.5062351,-73.5596853" target="_blank" rel="noopener">Place-d'Armes</a></strong> or <strong><a href="https://www.google.com/maps/search/?api=1&query=45.5100913,-73.556422" target="_blank" rel="noopener">Champ-de-Mars</a></strong> (both put you right in <a href="https://www.google.com/maps/search/?api=1&query=45.5062351,-73.5596853" target="_blank" rel="noopener">Old Montréal</a>). ~15–18 min ride.</p>
+        </div>
+      </div>
+      <div class="t-row">
+        <div class="t-time">9:15</div>
+        <div class="t-body">
+          <h4>The walking path — <a href="https://www.google.com/maps/search/?api=1&query=45.5062351,-73.5596853" target="_blank" rel="noopener">Old Montréal</a> → <a href="https://www.google.com/maps/search/?api=1&query=45.5087444,-73.5488449" target="_blank" rel="noopener">Old Port</a></h4>
+          <p>Exit at <strong><a href="https://www.google.com/maps/search/?api=1&query=45.5062351,-73.5596853" target="_blank" rel="noopener">Place-d'Armes</a></strong> station. This route is a loop, so you end up a short walk from <a href="https://www.google.com/maps/search/?api=1&query=45.5100913,-73.556422" target="_blank" rel="noopener">Champ-de-Mars</a> station for the trip home — no backtracking.</p>
+
+          <figure class="map-figure">
+            <div id="map-oldmtl" class="leaflet-map"></div>
+            <figcaption>The walking loop, numbered in order — tap a pin for details.</figcaption>
+          </figure>
+
+          <div class="options">
+            <p><strong>Stop 1 — <a href="https://www.google.com/maps/search/?api=1&query=45.5045254,-73.5561204" target="_blank" rel="noopener">Notre-Dame Basilica</a>.</strong> Right at the metro exit. Tickets for going inside are timed and do sell out on busy days — worth booking online ahead rather than chancing it at the door.</p>
+            <p><strong>Stop 2 — <a href="https://www.google.com/maps/search/?api=1&query=45.5078753,-73.5533705" target="_blank" rel="noopener">Place Jacques-Cartier</a>.</strong> A few minutes' walk east, gently downhill. This is where the street performers cluster, especially from late morning on — plenty of benches and steps to sit at kid-level and just watch a show.</p>
+            <p><strong>Stop 3 — <a href="https://www.google.com/maps/search/?api=1&query=45.5089192,-73.5543325" target="_blank" rel="noopener">Montreal City Hall</a>.</strong> A block north of <a href="https://www.google.com/maps/search/?api=1&query=45.5078753,-73.5533705" target="_blank" rel="noopener">Place Jacques-Cartier</a>, overlooking it — nice green space at <a href="https://www.google.com/maps/search/?api=1&query=45.5100913,-73.556422" target="_blank" rel="noopener">Champ-de-Mars</a> if anyone needs to run around before continuing.</p>
+            <p><strong>Optional add-on — <a href="https://www.google.com/maps/search/?api=1&query=45.5026511,-73.5541668" target="_blank" rel="noopener">Pointe-à-Callière</a> (Montréal Museum of Archaeology and History).</strong> Just south of City Hall, near Place Royale. Built right over the city's original birthplace, with an interactive basement/pirate area reviewers say is a hit with young kids — worth a stop if anyone wants an indoor break mid-walk.</p>
+            <p><strong>Optional add-on — <a href="https://www.google.com/maps/search/?api=1&query=45.505983,-73.5576063" target="_blank" rel="noopener">Museum of Illusions</a>.</strong> A few minutes from Notre-Dame Basilica — small, interactive, photo-op rooms that reviewers say hold attention across ages, not just little kids.</p>
+            <p><strong>Stop 4 — <a href="https://www.google.com/maps/search/?api=1&query=45.5089549,-73.5514907" target="_blank" rel="noopener">Bonsecours Market</a>.</strong> Head back down toward the river — you'll see the <a href="https://www.google.com/maps/search/?api=1&query=45.5087444,-73.5488449" target="_blank" rel="noopener">Old Port</a> promenade and <a href="https://www.google.com/maps/search/?api=1&query=45.5089549,-73.5514907" target="_blank" rel="noopener">Marché Bonsecours</a>' silver dome as you go. Good lunch stop.</p>
+            <p><strong>Stop 5 — <a href="https://www.google.com/maps/search/?api=1&query=45.5087444,-73.5488449" target="_blank" rel="noopener">Grande Roue</a> &amp; <a href="https://www.google.com/maps/search/?api=1&query=45.5087444,-73.5488449" target="_blank" rel="noopener">Old Port</a>.</strong> Continue along the waterfront — the Ferris wheel and the mini-golf/pirate play area.</p>
+          </div>
+        </div>
+      </div>
+      <div class="t-row">
+        <div class="t-time">12:00</div>
+        <div class="t-body">
+          <h4>Lunch in <a href="https://www.google.com/maps/search/?api=1&query=45.5062351,-73.5596853" target="_blank" rel="noopener">Old Montréal</a></h4>
+          <div class="options">
+            <p><strong><a href="https://www.google.com/maps/search/?api=1&query=Le%20Petit%20Sao%20Montreal" target="_blank" rel="noopener">Le Petit Sao</a></strong> — Vietnamese, has a "Super Sao VIP" kids' menu with a coloring activity built in.</p>
+            <p><strong><a href="https://www.google.com/maps/search/?api=1&query=Vieux-Port%20Steakhouse%20Montreal" target="_blank" rel="noopener">Vieux-Port Steakhouse</a></strong> — $12 kids' menu with coloring sheets.</p>
+            <p><strong><a href="https://www.google.com/maps/search/?api=1&query=45.5089549,-73.5514907" target="_blank" rel="noopener">Marché Bonsecours</a> food hall</strong> — good if the group can't agree on one cuisine (Stop 4 on the map above).</p>
+          </div>
+        </div>
+      </div>
+      <div class="t-row">
+        <div class="t-time">1:30</div>
+        <div class="t-body">
+          <h4>Stop 5 — <a href="https://www.google.com/maps/search/?api=1&query=45.5087444,-73.5488449" target="_blank" rel="noopener">Old Port</a>: Ferris wheel + Pirate/mini-golf park</h4>
+          <p>Continue along the waterfront promenade east from <a href="https://www.google.com/maps/search/?api=1&query=45.5089549,-73.5514907" target="_blank" rel="noopener">Marché Bonsecours</a> — the <a href="https://www.google.com/maps/search/?api=1&query=45.5087444,-73.5488449" target="_blank" rel="noopener">Grande Roue</a> (Ferris wheel) is easy to spot from the water's edge, with the mini-golf/pirate play area nearby. Book <a href="https://www.google.com/maps/search/?api=1&query=45.5087444,-73.5488449" target="_blank" rel="noopener">Grande Roue</a> tickets ahead if you can — the line moves slower in person. Bring water and sun protection; it's an open, shadeless waterfront.</p>
+        </div>
+      </div>
+      <div class="t-row">
+        <div class="t-time">3:30</div>
+        <div class="t-body">
+          <h4>Head back <span class="badge orange">Orange Line</span></h4>
+          <p>From the <a href="https://www.google.com/maps/search/?api=1&query=45.5087444,-73.5488449" target="_blank" rel="noopener">Old Port</a>, it's a short walk back up to <strong><a href="https://www.google.com/maps/search/?api=1&query=45.5100913,-73.556422" target="_blank" rel="noopener">Champ-de-Mars</a></strong> station — closing the loop. Orange line direct to Mont-Royal, no transfer.</p>
+        </div>
+      </div>
+      <div class="t-row">
+        <div class="t-time">4:15–5:30</div>
+        <div class="t-body"><h4>Rest / TV time at home</h4></div>
+      </div>
+      <div class="t-row">
+        <div class="t-time">6:00</div>
+        <div class="t-body">
+          <h4>Dinner — kept under 15 minutes on foot</h4>
+          <div class="options">
+            <p><strong><a href="https://www.google.com/maps/search/?api=1&query=45.5253231,-73.5748058" target="_blank" rel="noopener">La Banquise</a></strong> (10 min) — the iconic poutine stop, on your Must-Eat list, open 24 hrs.</p>
+            <p><strong><a href="https://www.google.com/maps/search/?api=1&query=45.5264899,-73.580349" target="_blank" rel="noopener">Notre-Bœuf-de-Grâce</a></strong> (9 min) — burgers, casual, lots of seating.</p>
+            <p><strong><a href="https://www.google.com/maps/search/?api=1&query=45.5276358,-73.57974" target="_blank" rel="noopener">L'Entrepôt Mont-Royal</a></strong> (10 min) — pub food, pierogis, fish &amp; chips, open till 3am if timing slips.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="kid-tip">This is your longest day out — everything after 4pm is deliberately unstructured to absorb whatever energy is left.</div>
+  </div>
+</section>
+
+<!-- ============ TUESDAY ============ -->
+<section class="alt" id="tue">
+  <div class="day-card">
+    <span class="day-tag">Tuesday · <a href="https://www.google.com/maps/search/?api=1&query=45.55958,-73.549874" target="_blank" rel="noopener">Biodôme</a></span>
+    <h2>Ecosystems in the Morning, Easy Afternoon</h2>
+    <div class="timeline">
+      <div class="t-row">
+        <div class="t-time">7:30</div>
+        <div class="t-body"><h4>Breakfast at home</h4></div>
+      </div>
+      <div class="t-row">
+        <div class="t-time">8:30</div>
+        <div class="t-body">
+          <h4>Head out <span class="badge orange">Orange</span> <span class="badge green">Green</span></h4>
+          <p>Walk 6 min to <a href="https://www.google.com/maps/search/?api=1&query=45.5245931,-73.5816611" target="_blank" rel="noopener">Mont-Royal metro</a>. Orange line toward <a href="https://www.google.com/maps/search/?api=1&query=45.5152,-73.5605" target="_blank" rel="noopener">Berri-UQAM</a>, transfer to the Green line eastbound, ride to <strong><a href="https://www.google.com/maps/search/?api=1&query=45.5611957,-73.5472297" target="_blank" rel="noopener">Viau</a></strong> station, then it's a 5–8 min walk to the <a href="https://www.google.com/maps/search/?api=1&query=45.55958,-73.549874" target="_blank" rel="noopener">Biodôme</a>. Budget ~30–35 min door to door.</p>
+          <figure class="map-figure">
+            <div id="map-biodome" class="leaflet-map"></div>
+            <figcaption>Home → Mont-Royal → <a href="https://www.google.com/maps/search/?api=1&query=45.5152,-73.5605" target="_blank" rel="noopener">Berri-UQAM</a> → <a href="https://www.google.com/maps/search/?api=1&query=45.5611957,-73.5472297" target="_blank" rel="noopener">Viau</a> → <a href="https://www.google.com/maps/search/?api=1&query=45.55958,-73.549874" target="_blank" rel="noopener">Biodôme</a>.</figcaption>
+          </figure>
+        </div>
+      </div>
+      <div class="t-row">
+        <div class="t-time">9:15–11:45</div>
+        <div class="t-body">
+          <h4><a href="https://www.google.com/maps/search/?api=1&query=45.55958,-73.549874" target="_blank" rel="noopener">Biodôme</a></h4>
+          <p>Fully indoor, climate-controlled, and stroller-friendly — a good pick for a hot or rainy morning. Book timed-entry tickets online in advance; Space for Life sites do sell out, especially in summer.</p>
+          <div class="note">Two easy add-ons if anyone still has energy: the <a href="https://www.google.com/maps/search/?api=1&query=45.5592018,-73.5576932" target="_blank" rel="noopener">Botanical Garden</a> is genuinely walking distance from the Biodôme (same Space for Life complex), and the <a href="https://www.google.com/maps/search/?api=1&query=45.5565024,-73.5512185" target="_blank" rel="noopener">Olympic Stadium</a> is right next door too — 2026 marks its 50th anniversary, with special historical exhibits planned.</div>
+        </div>
+      </div>
+      <div class="t-row">
+        <div class="t-time">12:00</div>
+        <div class="t-body">
+          <h4>Lunch near the <a href="https://www.google.com/maps/search/?api=1&query=45.55958,-73.549874" target="_blank" rel="noopener">Biodôme</a></h4>
+          <div class="options">
+            <p><strong><a href="https://www.google.com/maps/search/?api=1&query=45.5525405,-73.5521485" target="_blank" rel="noopener">Restaurant Fusion Express</a></strong> (~10 min walk) — Asian fast-casual, reviewers specifically mention it as a nice stop after the <a href="https://www.google.com/maps/search/?api=1&query=45.55958,-73.549874" target="_blank" rel="noopener">Biodôme</a>.</p>
+            <p><strong><a href="https://www.google.com/maps/search/?api=1&query=45.551439,-73.54915" target="_blank" rel="noopener">Poutine Centrale</a></strong> (~10 min walk, 5 min from Pie-IX station) — a second poutine option if you want to spread out the Must-Eat list.</p>
+            <p><strong><a href="https://www.google.com/maps/search/?api=1&query=45.5565024,-73.5512185" target="_blank" rel="noopener">L'Insolite</a></strong> — right inside Olympic Park itself, most convenient if legs are done for the day, though reviews say it's simple grab-and-go food.</p>
+          </div>
+        </div>
+      </div>
+      <div class="t-row">
+        <div class="t-time">1:00</div>
+        <div class="t-body"><h4>Head home</h4><p>Same route in reverse.</p></div>
+      </div>
+      <div class="t-row">
+        <div class="t-time">1:45–3:30</div>
+        <div class="t-body"><h4>Rest / quiet time at home</h4><p>This is the recovery window after the day's one big outing.</p></div>
+      </div>
+      <div class="t-row">
+        <div class="t-time">5:00</div>
+        <div class="t-body"><h4>Dinner at home or order in</h4><p>Keep it low-key — you've already had the day's adventure.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WEDNESDAY ============ -->
+<section id="wed">
+  <div class="day-card">
+    <span class="day-tag">Wednesday · <a href="https://www.google.com/maps/search/?api=1&query=45.5124464,-73.5330319" target="_blank" rel="noopener">Parc Jean-Drapeau</a></span>
+    <h2>Beach, Pool &amp; Floral Sculptures</h2>
+    <div class="timeline">
+      <div class="t-row">
+        <div class="t-time">8:00</div>
+        <div class="t-body"><h4>Breakfast at home</h4></div>
+      </div>
+      <div class="t-row">
+        <div class="t-time">9:00</div>
+        <div class="t-body">
+          <h4>Head out <span class="badge orange">Orange</span> <span class="badge yellow">Yellow</span></h4>
+          <p>Walk to <a href="https://www.google.com/maps/search/?api=1&query=45.5245931,-73.5816611" target="_blank" rel="noopener">Mont-Royal metro</a>, Orange line to <a href="https://www.google.com/maps/search/?api=1&query=45.5152,-73.5605" target="_blank" rel="noopener">Berri-UQAM</a>, transfer to the Yellow line toward Longueuil, get off at <strong><a href="https://www.google.com/maps/search/?api=1&query=45.5124464,-73.5330319" target="_blank" rel="noopener">Jean-Drapeau</a></strong> — the park's own station, on <a href="https://www.google.com/maps/search/?api=1&query=45.5124464,-73.5330319" target="_blank" rel="noopener">Île Sainte-Hélène</a>. Exits open right onto the <a href="https://www.google.com/maps/search/?api=1&query=45.5124464,-73.5330319" target="_blank" rel="noopener">Espace 67</a> plaza, the park's main entrance point.</p>
+          <figure class="map-figure">
+            <div id="map-jeandrapeau" class="leaflet-map"></div>
+            <figcaption>Home → Mont-Royal → <a href="https://www.google.com/maps/search/?api=1&query=45.5152,-73.5605" target="_blank" rel="noopener">Berri-UQAM</a> → <a href="https://www.google.com/maps/search/?api=1&query=45.5124464,-73.5330319" target="_blank" rel="noopener">Jean-Drapeau</a> → <a href="https://www.google.com/maps/search/?api=1&query=45.4985211,-73.5229356" target="_blank" rel="noopener">Jean-Doré Beach</a> (shuttle).</figcaption>
+          </figure>
+        </div>
+      </div>
+      <div class="t-row">
+        <div class="t-time">9:30</div>
+        <div class="t-body">
+          <h4>Getting to the beach from the metro</h4>
+          <p>The beach (<a href="https://www.google.com/maps/search/?api=1&query=45.4985211,-73.5229356" target="_blank" rel="noopener">Jean-Doré Beach</a>) is over on <a href="https://www.google.com/maps/search/?api=1&query=45.4985211,-73.5229356" target="_blank" rel="noopener">Île Notre-Dame</a>, a separate island from the metro station — too far to walk comfortably with young kids. Right at the metro exit, catch the <strong><a href="https://www.stm.info/en/info/networks/bus-network-and-schedules-enlightened/768-plage-jean-dore-station-jean-drapeau" target="_blank" rel="noopener">STM shuttle bus 768</a></strong> ("Plage Jean-Doré / Station <a href="https://www.google.com/maps/search/?api=1&query=45.5124464,-73.5330319" target="_blank" rel="noopener">Jean-Drapeau</a>"), a summer-only route built for exactly this trip. The <strong>767</strong> (La Ronde / La Plage) also passes the beach if you end up waiting for one over the other.</p>
+        </div>
+      </div>
+      <div class="t-row">
+        <div class="t-time">9:45–1:00</div>
+        <div class="t-body">
+          <h4>Beach / pool + gardens</h4>
+          <p>What to expect: a sand beach with supervised swimming, a playground right on-site, volleyball courts, and watercraft rentals — plus bathrooms, changing rooms, and a snack bar (reviews are mixed on the food, so bringing your own snacks is a safe bet). Entry has historically run in tiers — roughly $8 for ages 14+, $4 for kids 6–13, free under 6, with family passes around $20 — worth confirming current prices at the gate since these shift year to year.</p>
+          <p>If you want a change of pace from the water, the park's <strong><a href="https://www.google.com/maps/search/?api=1&query=Jardins%20des%20Floralies%20Parc%20Jean-Drapeau%20Montreal" target="_blank" rel="noopener">Floralies Gardens</a></strong> — near the nautical activities pavilion — has a network of lagoons connected to the main lake, with pedal boats and kayaks for rent (paid, life jackets provided) and a quieter, garden-like setting than the beach itself. This is likely where any floral display during your visit would be set up — worth asking at the gate what's blooming and where.</p>
+          <p>Pack towels, sunscreen, and water shoes — the beach itself doesn't rent these.</p>
+        </div>
+      </div>
+      <div class="t-row">
+        <div class="t-time">1:00</div>
+        <div class="t-body"><h4>Lunch on-site or pack a picnic</h4></div>
+      </div>
+      <div class="t-row">
+        <div class="t-time">2:30</div>
+        <div class="t-body"><h4>Head back to the Plateau</h4></div>
+      </div>
+      <div class="t-row">
+        <div class="t-time">3:30–5:30</div>
+        <div class="t-body"><h4>Rest at home</h4><p>A full day of sun and swimming is tiring in its own way — build in real downtime.</p></div>
+      </div>
+      <div class="t-row">
+        <div class="t-time">6:00</div>
+        <div class="t-body">
+          <h4>Dinner, close to home</h4>
+          <div class="options">
+            <p><strong><a href="https://www.google.com/maps/search/?api=1&query=45.5202377,-73.5799072" target="_blank" rel="noopener">Café chez Téta</a></strong> (2 min) — if it's open that day, the closest option by far.</p>
+            <p><strong><a href="https://www.google.com/maps/search/?api=1&query=45.5264899,-73.580349" target="_blank" rel="noopener">Notre-Bœuf-de-Grâce</a></strong> (9 min) or <strong><a href="https://www.google.com/maps/search/?api=1&query=45.5253231,-73.5748058" target="_blank" rel="noopener">La Banquise</a></strong> (10 min) — repeat favorites, both easy with tired kids.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ THURSDAY ============ -->
+<section class="alt" id="thu">
+  <div class="day-card">
+    <span class="day-tag">Thursday · All Plateau</span>
+    <h2>Pedestrian Streets, Shops &amp; Treats — No Transit Needed</h2>
+    <div class="timeline">
+      <div class="t-row">
+        <div class="t-time">9:00</div>
+        <div class="t-body"><h4>Breakfast at home, easy start</h4></div>
+      </div>
+      <div class="t-row">
+        <div class="t-time">10:00</div>
+        <div class="t-body">
+          <h4><a href="https://www.google.com/maps/search/?api=1&query=Avenue%20du%20Mont-Royal%2C%20Montreal" target="_blank" rel="noopener">Avenue du Mont-Royal</a>, western pedestrian stretch <span class="badge walk">6–8 min</span></h4>
+          <p>Browse toward Saint-Laurent. Pop into <strong><a href="https://www.google.com/maps/search/?api=1&query=45.5226479,-73.5842132" target="_blank" rel="noopener">Librairie Le Port de tête</a></strong> (kids' section) and <strong><a href="https://www.google.com/maps/search/?api=1&query=45.5194704,-73.5771847" target="_blank" rel="noopener">Grande Ourse</a></strong> for wooden toys along the way.</p>
+        </div>
+      </div>
+      <div class="t-row">
+        <div class="t-time">11:00</div>
+        <div class="t-body">
+          <h4>Treat break</h4>
+          <p><strong><a href="https://www.google.com/maps/search/?api=1&query=45.5205777,-73.5861985" target="_blank" rel="noopener">Mont Éclair</a></strong>, <strong><a href="https://www.google.com/maps/search/?api=1&query=45.5234085,-73.582053" target="_blank" rel="noopener">Chocolats Andrée</a></strong>, or <strong><a href="https://www.google.com/maps/search/?api=1&query=45.5231238,-73.5834671" target="_blank" rel="noopener">Kouign Amann Bakery</a></strong> (4 min, right on Mont-Royal Ave — reviewers rave about the sliced kouign amann) — all under 5 minutes from home, easy to loop back through.</p>
+        </div>
+      </div>
+      <div class="t-row">
+        <div class="t-time">12:00</div>
+        <div class="t-body">
+          <h4>Lunch, Plateau-only</h4>
+          <div class="options">
+            <p><strong><a href="https://www.google.com/maps/search/?api=1&query=Stella%20Pizzeria%20Montreal" target="_blank" rel="noopener">Stella Pizzeria</a></strong> — pizza and mac for the kids.</p>
+            <p><strong><a href="https://www.google.com/maps/search/?api=1&query=Billy%20J%27ai%20Faim%20Montreal" target="_blank" rel="noopener">Billy J'ai Faim</a></strong> — healthy seasonal dishes, good kids' deals.</p>
+            <p><strong><a href="https://www.google.com/maps/search/?api=1&query=45.5253231,-73.5748058" target="_blank" rel="noopener">La Banquise</a></strong> — if poutine #3 is on the table.</p>
+            <p><strong><a href="https://www.google.com/maps/search/?api=1&query=45.5163503,-73.5776401" target="_blank" rel="noopener">Schwartz's Deli</a></strong> (8 min) — the legendary smoked meat sandwich, genuinely walkable from home. Small and can have a wait/shared seating, but reviewers say the staff are great with kids.</p>
+          </div>
+        </div>
+      </div>
+      <div class="t-row">
+        <div class="t-time">1:30</div>
+        <div class="t-body"><h4>Rest at home</h4></div>
+      </div>
+      <div class="t-row">
+        <div class="t-time">3:00</div>
+        <div class="t-body">
+          <h4><a href="https://www.google.com/maps/search/?api=1&query=Avenue%20Duluth%20Est%2C%20Montreal" target="_blank" rel="noopener">Duluth Avenue East</a> pedestrian stretch <span class="badge walk">7 min</span></h4>
+          <p>Between Saint-Laurent and Saint-Hubert — quieter and more residential than Mont-Royal, nice for a slower second lap.</p>
+        </div>
+      </div>
+      <div class="t-row">
+        <div class="t-time">4:30</div>
+        <div class="t-body">
+          <h4>Ice cream stop</h4>
+          <p><strong><a href="https://www.google.com/maps/search/?api=1&query=45.5215567,-73.5848916" target="_blank" rel="noopener">Le Blueboy</a></strong> (4 min) — soft serve and sundaes, an easy way to end the walking day.</p>
+        </div>
+      </div>
+      <div class="t-row">
+        <div class="t-time">6:00</div>
+        <div class="t-body"><h4>Dinner nearby</h4><p>Repeat any close favorite, or try somewhere new on Mont-Royal Ave.</p></div>
+      </div>
+    </div>
+    <div class="kid-tip">Nothing today requires the metro — if energy runs out early, you're never more than a few blocks from home.</div>
+  </div>
+</section>
+
+<!-- ============ FRIDAY ============ -->
+<section id="fri">
+  <div class="day-card">
+    <span class="day-tag">Friday · Easy Morning, Then Pack</span>
+    <h2>One Close, Low-Key Activity</h2>
+    <div class="timeline">
+      <div class="t-row">
+        <div class="t-time">9:00</div>
+        <div class="t-body"><h4>Relaxed breakfast at home</h4></div>
+      </div>
+      <div class="t-row">
+        <div class="t-time">10:00</div>
+        <div class="t-body">
+          <h4>Pick one nearby activity</h4>
+          <div class="options">
+            <p><strong><a href="https://www.google.com/maps/search/?api=1&query=45.5226123,-73.5804882" target="_blank" rel="noopener">Céramic Café-Studio</a></strong> <span class="badge walk">3 min</span> — paint ceramics, gourmet paninis on-site. Note reviews mention sessions can run 2–3.5 hours, so this can eat the whole morning.</p>
+            <p><strong><a href="https://www.google.com/maps/search/?api=1&query=45.5196107,-73.5737314" target="_blank" rel="noopener">Café La Chouette</a></strong> <span class="badge walk">9 min</span> — cookie decorating with royal icing, hot chocolate. Book ahead — space is limited.</p>
+            <p><strong><a href="https://www.google.com/maps/search/?api=1&query=45.5248723,-73.582474" target="_blank" rel="noopener">Plateau-Mont-Royal Library</a></strong> <span class="badge walk">6 min</span> — free, has an art gallery inside, a nice zero-cost option if you want minimal structure.</p>
+          </div>
+        </div>
+      </div>
+      <div class="t-row">
+        <div class="t-time">12:00</div>
+        <div class="t-body"><h4>Lunch, close to home</h4></div>
+      </div>
+      <div class="t-row">
+        <div class="t-time">1:00–5:00</div>
+        <div class="t-body"><h4>Clean up and pack</h4><p>Building in a full afternoon buffer for packing with two kids underfoot.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SATURDAY ============ -->
+<section class="alt" id="sat">
+  <div class="day-card">
+    <span class="day-tag">Saturday · Fly Home</span>
+    <h2>Air Canada AC8671 — Departs 1:10pm</h2>
+    <div class="timeline">
+      <div class="t-row">
+        <div class="t-time">morning</div>
+        <div class="t-body"><h4>Final packing, breakfast at home</h4><p>Leave real buffer time to get to <a href="https://www.google.com/maps/search/?api=1&query=Montreal-Trudeau%20Airport%20YUL" target="_blank" rel="noopener">YUL</a> and through security with kids and bags — international flights typically want you there 2–3 hrs early.</p></div>
+      </div>
+      <div class="t-row">
+        <div class="t-time">1:10pm</div>
+        <div class="t-body"><h4>Wheels up — Montréal YUL → Raleigh-Durham RDU</h4><p>Air Canada AC8671, landing 3:25pm local time. Confirmation <strong>C6G39T</strong>.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ RECOMMENDATIONS ============ -->
+<section id="recs">
+  <div class="section-head"><span class="idx">+1</span><h2>Recs &amp; Links</h2></div>
+  <p class="section-sub">A running library of alternates, organized by type. Every card is tagged with what it is, how far it is from 4300 Av. Laval, and its neighborhood.</p>
+
+  <div class="recs-group">
+    <div class="recs-group-head"><h3>🏛️ Attractions</h3><span class="count">12</span></div>
+    <div class="recs-grid">
+      <div class="rec-card">
+        <div class="rec-tags"><span class="tag tag-attraction">Attraction</span><span class="tag-dist">2 min walk</span><span class="tag-neigh">Plateau-Mont-Royal</span></div>
+        <h4><a href="https://www.google.com/maps/search/?api=1&query=45.5252775,-73.5695379" target="_blank" rel="noopener">Parc La Fontaine</a></h4>
+        <p>Worth treating as a default fallback slot any afternoon energy runs out — not just the Sunday visit.</p>
+      </div>
+      <div class="rec-card">
+        <div class="rec-tags"><span class="tag tag-attraction">Attraction</span><span class="tag-dist">6 min walk</span><span class="tag-neigh">Plateau-Mont-Royal</span></div>
+        <h4><a href="https://www.google.com/maps/search/?api=1&query=45.5248723,-73.582474" target="_blank" rel="noopener">Plateau-Mont-Royal Library</a></h4>
+        <p>Free, air-conditioned, small public art gallery inside a former 1895 boarding school — good rainy-day option.</p>
+      </div>
+      <div class="rec-card">
+        <div class="rec-tags"><span class="tag tag-attraction">Attraction</span><span class="tag-dist">6 min walk</span><span class="tag-neigh">Plateau-Mont-Royal</span></div>
+        <h4><a href="https://www.google.com/maps/search/?api=1&query=45.5249192,-73.582589" target="_blank" rel="noopener">Maison de la culture du Plateau-Mont-Royal</a></h4>
+        <p>Same building as the library — municipal cultural centers often run free family exhibits.</p>
+      </div>
+      <div class="rec-card">
+        <div class="rec-tags"><span class="tag tag-attraction">Attraction</span><span class="tag-dist">8 min walk</span><span class="tag-neigh">Mount Royal (base)</span></div>
+        <h4><a href="https://www.google.com/maps/search/?api=1&query=45.5177162,-73.5869746" target="_blank" rel="noopener">Parc Jeanne-Mance</a></h4>
+        <p>Playgrounds and picnic space at the foot of the mountain, none of the elevation — the easy alternative to actually climbing Mount Royal.</p>
+      </div>
+      <div class="rec-card">
+        <div class="rec-tags"><span class="tag tag-attraction">Attraction</span><span class="tag-dist">2.0 km · ~29 min walk or bus</span><span class="tag-neigh">Mount Royal / Outremont / Westmount</span></div>
+        <h4><a href="https://www.google.com/maps/search/?api=1&query=45.5033726,-73.5868754" target="_blank" rel="noopener">Mount Royal &amp; Kondiaronk Belvedere</a></h4>
+        <p>The city's iconic skyline lookout. Real stairs (~160m elevation) — better for older kids or a parents' turn; the #11 bus runs up if little legs won't make it. 2026 is the park's 150th anniversary. Washrooms and a canteen at the chalet.</p>
+      </div>
+      <div class="rec-card">
+        <div class="rec-tags"><span class="tag tag-attraction">Attraction</span><span class="tag-dist">4.4 km · via metro</span><span class="tag-neigh">Côte-des-Neiges</span></div>
+        <h4><a href="https://www.google.com/maps/search/?api=1&query=45.4921354,-73.6191235" target="_blank" rel="noopener">Saint Joseph's Oratory</a></h4>
+        <p>A 97m dome, second only to St. Peter's in Rome. Metro to Côte-des-Neiges, then a grand staircase up for panoramic views. Allow 1–2 hours.</p>
+      </div>
+      <div class="rec-card">
+        <div class="rec-tags"><span class="tag tag-attraction">Attraction</span><span class="tag-dist">via metro</span><span class="tag-neigh">Downtown / Ville-Marie</span></div>
+        <h4>RÉSO — the Underground City</h4>
+        <p>A 32km climate-controlled pedestrian network connecting downtown hotels, malls, and the convention centre — from your original must-do list. Good rainy-day or too-hot-out option.</p>
+      </div>
+      <div class="rec-card">
+        <div class="rec-tags"><span class="tag tag-attraction">Attraction</span><span class="tag-dist">4.6 km · via metro</span><span class="tag-neigh">Hochelaga-Maisonneuve (Olympic District)</span></div>
+        <h4><a href="https://www.google.com/maps/search/?api=1&query=45.5592018,-73.5576932" target="_blank" rel="noopener">Botanical Garden</a></h4>
+        <p>Walking distance from the Biodôme (same Space for Life complex) — could extend Tuesday. Famous for its autumn Chinese Lantern festival if your dates line up.</p>
+      </div>
+      <div class="rec-card">
+        <div class="rec-tags"><span class="tag tag-attraction">Attraction</span><span class="tag-dist">2.5 km · via metro/bus</span><span class="tag-neigh">Golden Square Mile / Downtown</span></div>
+        <h4><a href="https://www.google.com/maps/search/?api=1&query=45.4985219,-73.5794001" target="_blank" rel="noopener">Montréal Museum of Fine Arts</a></h4>
+        <p>The city's premier art museum, if a cultural stop appeals over another park day.</p>
+      </div>
+      <div class="rec-card">
+        <div class="rec-tags"><span class="tag tag-attraction">Attraction</span><span class="tag-dist">2.9 km · on Monday's route</span><span class="tag-neigh">Old Montréal</span></div>
+        <h4><a href="https://www.google.com/maps/search/?api=1&query=45.5026511,-73.5541668" target="_blank" rel="noopener">Pointe-à-Callière</a></h4>
+        <p>Montréal Museum of Archaeology and History, built over the city's birthplace. Interactive basement/pirate area reviewers say is a hit with young kids. Also noted as an optional Monday add-on.</p>
+      </div>
+      <div class="rec-card">
+        <div class="rec-tags"><span class="tag tag-attraction">Attraction</span><span class="tag-dist">2.5 km · on Monday's route</span><span class="tag-neigh">Old Montréal</span></div>
+        <h4><a href="https://www.google.com/maps/search/?api=1&query=45.505983,-73.5576063" target="_blank" rel="noopener">Museum of Illusions</a></h4>
+        <p>A few minutes from Notre-Dame Basilica — small, interactive, photo-op rooms reviewers say hold attention across ages. Also noted on Monday's route.</p>
+      </div>
+      <div class="rec-card">
+        <div class="rec-tags"><span class="tag tag-attraction">Attraction</span><span class="tag-dist">3.0 km · near Monday's route</span><span class="tag-neigh">Old Montréal / Old Port</span></div>
+        <h4><a href="https://www.google.com/maps/search/?api=1&query=45.5047874,-73.5507431" target="_blank" rel="noopener">Montreal Science Centre</a></h4>
+        <p>Interactive exhibits and an IMAX theatre on the Old Port waterfront — from your original wishlist, easy to combine with Monday. Plan for a few hours.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="recs-group">
+    <div class="recs-group-head"><h3>🛍️ Shops</h3><span class="count">7</span></div>
+    <div class="recs-grid">
+      <div class="rec-card">
+        <div class="rec-tags"><span class="tag tag-shop">Shop</span><span class="tag-dist">4 min walk</span><span class="tag-neigh">Plateau-Mont-Royal</span></div>
+        <h4><a href="https://www.google.com/maps/search/?api=1&query=45.523281,-73.581742" target="_blank" rel="noopener">Le Valet d'Cœur</a></h4>
+        <p>Games, puzzles, and gifts — good for a "we need something for the plane" run without a special trip.</p>
+      </div>
+      <div class="rec-card">
+        <div class="rec-tags"><span class="tag tag-shop">Shop</span><span class="tag-dist">5 min walk</span><span class="tag-neigh">Plateau-Mont-Royal</span></div>
+        <h4><a href="https://www.google.com/maps/search/?api=1&query=45.5194704,-73.5771847" target="_blank" rel="noopener">Grande Ourse</a></h4>
+        <p>Wooden, Waldorf-style toys — a different vibe than Le Valet d'Cœur, worth a look for open-ended toys over games.</p>
+      </div>
+      <div class="rec-card">
+        <div class="rec-tags"><span class="tag tag-shop">Shop (Market)</span><span class="tag-dist">3.1 km · via metro/bus</span><span class="tag-neigh">Villeray / Little Italy</span></div>
+        <h4><a href="https://www.google.com/maps/search/?api=1&query=45.5361095,-73.6148902" target="_blank" rel="noopener">Jean-Talon Market</a></h4>
+        <p>Didn't make the itinerary (too far for a morning fold-in), but as a standalone half-day it's the city's biggest public market.</p>
+      </div>
+      <div class="rec-card">
+        <div class="rec-tags"><span class="tag tag-shop">Shop (Market)</span><span class="tag-dist">4.6 km · via metro</span><span class="tag-neigh">Le Sud-Ouest (Lachine Canal)</span></div>
+        <h4><a href="https://www.google.com/maps/search/?api=1&query=45.4795202,-73.5769653" target="_blank" rel="noopener">Marché Atwater</a></h4>
+        <p>Smaller and Art Deco, near the Lachine Canal — similar vibe to Jean-Talon if it's more convenient to reach.</p>
+      </div>
+      <div class="rec-card">
+        <div class="rec-tags"><span class="tag tag-shop">Shop</span><span class="tag-dist">16 min walk</span><span class="tag-neigh">Mile End</span></div>
+        <h4><a href="https://www.google.com/maps/search/?api=1&query=45.5228777,-73.5951705" target="_blank" rel="noopener">Fairmount Bagel</a></h4>
+        <p>An alternate to St-Viateur — open 24 hours, same wood-fired boiled-in-honey-water style.</p>
+      </div>
+      <div class="rec-card">
+        <div class="rec-tags"><span class="tag tag-shop">Shop</span><span class="tag-dist">26 min walk</span><span class="tag-neigh">Mile End</span></div>
+        <h4><a href="https://www.google.com/maps/search/?api=1&query=45.5251122,-73.6040465" target="_blank" rel="noopener">Librairie Drawn &amp; Quarterly</a></h4>
+        <p>Well-loved indie bookstore with a strong kids'/comics section — worth pairing with a Fairmount bagel run since they're in the same neighborhood.</p>
+      </div>
+      <div class="rec-card">
+        <div class="rec-tags"><span class="tag tag-shop">Shop (District)</span><span class="tag-dist">2.0 km · via metro</span><span class="tag-neigh">Downtown / Ville-Marie</span></div>
+        <h4>Sainte-Catherine Street shopping</h4>
+        <p>Left out of the day-by-day plan to keep Thursday Plateau-only. Simons, Complexe Desjardins (50th anniversary in 2026), and Centre Eaton are all here.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="recs-group">
+    <div class="recs-group-head"><h3>🍽️ Food &amp; Drink</h3><span class="count">7</span></div>
+    <p class="section-sub" style="margin-bottom:16px;">All from the same Laurier Avenue East strip — still Plateau-Mont-Royal, entered via <a href="https://www.google.com/maps/search/?api=1&query=45.52739,-73.586861" target="_blank" rel="noopener">Laurier metro</a> (one stop from Mont-Royal) rather than walking the whole way from home. Casual, nothing fancy except where noted.</p>
+    <div class="recs-grid">
+      <div class="rec-card">
+        <div class="rec-tags"><span class="tag tag-food">Food</span><span class="tag-dist">13 min walk / 1 min from Laurier metro</span><span class="tag-neigh">Plateau-Mont-Royal (Laurier E.)</span></div>
+        <h4><a href="https://www.google.com/maps/search/?api=1&query=45.527325,-73.588993" target="_blank" rel="noopener">Noble Café</a></h4>
+        <p>Soft-serve floats in cold brew, matcha, or blackcurrant, right by the metro exit.</p>
+      </div>
+      <div class="rec-card">
+        <div class="rec-tags"><span class="tag tag-food">Food</span><span class="tag-dist">15 min walk</span><span class="tag-neigh">Plateau-Mont-Royal (Laurier E.)</span></div>
+        <h4><a href="https://www.google.com/maps/search/?api=1&query=45.529191,-73.5877915" target="_blank" rel="noopener">Fous Desserts</a></h4>
+        <p>Croissants and pastries, a Laurier St. fixture for 25+ years.</p>
+      </div>
+      <div class="rec-card">
+        <div class="rec-tags"><span class="tag tag-food">Food</span><span class="tag-dist">20 min walk</span><span class="tag-neigh">Plateau-Mont-Royal (Laurier E.)</span></div>
+        <h4><a href="https://www.google.com/maps/search/?api=1&query=45.5331718,-73.5842045" target="_blank" rel="noopener">Lapin Pressé</a></h4>
+        <p>Simple grilled cheese and iced coffee, order at the window.</p>
+      </div>
+      <div class="rec-card">
+        <div class="rec-tags"><span class="tag tag-food">Food</span><span class="tag-dist">24 min walk</span><span class="tag-neigh">Plateau-Mont-Royal (Laurier E.)</span></div>
+        <h4><a href="https://www.google.com/maps/search/?api=1&query=45.53584,-73.5813636" target="_blank" rel="noopener">Bêden Càphê</a></h4>
+        <p>Family-run Vietnamese counter, banh-mi and Vietnamese coffee, easy takeout.</p>
+      </div>
+      <div class="rec-card">
+        <div class="rec-tags"><span class="tag tag-food">Food · pricier</span><span class="tag-dist">23 min walk</span><span class="tag-neigh">Plateau-Mont-Royal (Laurier E.)</span></div>
+        <h4>Tri Express</h4>
+        <p>The nicer sushi spot on the same strip — dinner-reservation-style, if you ever want a night out without the kids.</p>
+      </div>
+      <div class="rec-card">
+        <div class="rec-tags"><span class="tag tag-attraction">Attraction (Park)</span><span class="tag-dist">19 min walk</span><span class="tag-neigh">Plateau-Mont-Royal (Laurier E.)</span></div>
+        <h4><a href="https://www.google.com/maps/search/?api=1&query=45.5319443,-73.5874847" target="_blank" rel="noopener">Parc Laurier</a></h4>
+        <p>The natural end point for a picnic — playground and pool on-site too.</p>
+      </div>
+      <div class="rec-card">
+        <div class="rec-tags"><span class="tag tag-food">Food</span><span class="tag-dist">3.1 km · via metro</span><span class="tag-neigh">Old Montréal (Square-Victoria)</span></div>
+        <h4><a href="https://www.google.com/maps/search/?api=1&query=45.4994163,-73.5553207" target="_blank" rel="noopener">Le Cartet</a></h4>
+        <p>From Gabby: really good maple latte, and seriously the best pancakes she's had. Reviewers back it up — the signature maple latte gets called out repeatedly, and the brunch menu is noted as working well for both adults and kids. Breakfast/brunch hours only (closes mid-afternoon). Worth combining with a Monday or Old Montréal detour since it's right nearby.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="recs-group">
+    <div class="rec-card" style="max-width:640px;">
+      <h4>Building in a genuine do-nothing day</h4>
+      <p>The itinerary is fairly full most days — if the kids are flagging by Wednesday or Thursday, it's easy to swap any afternoon for park + ice cream + home, with zero loss since almost everything close-to-home on this list is within 10 minutes.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  Built around <a href="https://www.google.com/maps/search/?api=1&query=45.520939,-73.581296" target="_blank" rel="noopener">4300 Av. Laval</a>, Plateau-Mont-Royal · Walking times are estimates — verify live transit and hours before you go.
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+
+  function makeMap(id, center, zoom) {
+    var map = L.map(id, { scrollWheelZoom: false }).setView(center, zoom);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+    return map;
+  }
+
+  function dot(map, latlng, color, label, radius) {
+    return L.circleMarker(latlng, {
+      radius: radius || 8,
+      color: '#fff',
+      weight: 2,
+      fillColor: color,
+      fillOpacity: 0.95
+    }).addTo(map).bindPopup(label);
+  }
+
+  function numberedStop(map, latlng, num, label, endpoint) {
+    var icon = L.divIcon({
+      className: '',
+      html: '<div class="stop-icon' + (endpoint ? ' endpoint' : '') + '">' + num + '</div>',
+      iconSize: [26, 26],
+      iconAnchor: [13, 13]
+    });
+    return L.marker(latlng, { icon: icon }).addTo(map).bindPopup(label);
+  }
+
+  // ---- Bearings / neighborhood map ----
+  if (document.getElementById('map-bearings')) {
+    var m1 = makeMap('map-bearings', [45.5230, -73.5760], 14);
+    dot(m1, [45.520939, -73.581296], '#1F3A54', '<strong>Home</strong><br>4300 Av. Laval', 11);
+    dot(m1, [45.5252775, -73.5695379], '#2E7D6B', 'Parc La Fontaine — 2 min walk');
+    dot(m1, [45.5245931, -73.5816611], '#D9622B', 'Mont-Royal Metro (Orange line) — 6 min');
+    dot(m1, [45.5183077, -73.568226], '#D9622B', 'Sherbrooke Metro (Orange line) — 15 min');
+    // groceries
+    [
+      ['Marché Kaïa — 5 min', 45.5207512, -73.5764630],
+      ['InterMarché Universel — 5 min', 45.521119, -73.585753],
+      ['Maxi — 7 min (biggest stock-up)', 45.5190840, -73.586759],
+      ["Segal's Market — 7 min", 45.5168692, -73.5788495],
+      ['Intermarché Boyer — 11 min (open till 11pm)', 45.5274528, -73.5795333]
+    ].forEach(function (p) { dot(m1, [p[1], p[2]], '#D65B4A', p[0]); });
+    // toy stores
+    [
+      ["Le Valet d'Cœur — 4 min", 45.523281, -73.581742],
+      ['Grande Ourse — 5 min', 45.5194704, -73.5771847],
+      ['Ojeux — 14 min', 45.5296030, -73.577477],
+      ['Joubec — 16 min', 45.5305693, -73.5764143]
+    ].forEach(function (p) { dot(m1, [p[1], p[2]], '#E3A23C', p[0]); });
+    // ice cream / sweets
+    [
+      ['Chocolats Andrée — 4 min', 45.5234085, -73.582053],
+      ['Mont Éclair — 5 min', 45.5205777, -73.5861985],
+      ['Le Blueboy — 4 min', 45.5215567, -73.5848916],
+      ['Unicone — 9 min', 45.5199381, -73.5735978]
+    ].forEach(function (p) { dot(m1, [p[1], p[2]], '#B85C8A', p[0]); });
+    // coffee
+    [
+      ['Ciao Amore Café — 8 min', 45.5260495, -73.5808193],
+      ['Café Myriade — 6 min', 45.5196182, -73.5865787],
+      ['Café chez Téta — 2 min (closed Mon/Tue)', 45.5202377, -73.5799072]
+    ].forEach(function (p) { dot(m1, [p[1], p[2]], '#6B4A2B', p[0]); });
+    // bookstores
+    [
+      ["Librairie Le Port de tête — 4 min", 45.5226479, -73.5842132],
+      ['Librairie De Stiil — 5 min', 45.5203464, -73.5764506],
+      ["Librairie l'Échange — 7 min", 45.5254644, -73.5818584]
+    ].forEach(function (p) { dot(m1, [p[1], p[2]], '#3B5BA5', p[0]); });
+  }
+
+  // ---- Sunday: home -> Parc La Fontaine ----
+  if (document.getElementById('map-lafontaine')) {
+    var m2 = makeMap('map-lafontaine', [45.5231, -73.5754], 15);
+    var a = [45.520939, -73.581296], b = [45.5252775, -73.5695379];
+    L.polyline([a, b], { color: '#2E7D6B', weight: 3, dashArray: '2 10' }).addTo(m2);
+    dot(m2, a, '#1F3A54', '<strong>Home</strong>', 10);
+    dot(m2, b, '#2E7D6B', '<strong>Parc La Fontaine</strong><br>2 min walk');
+  }
+
+  // ---- Monday: Old Montreal / Old Port walking loop ----
+  if (document.getElementById('map-oldmtl')) {
+    var m3 = makeMap('map-oldmtl', [45.5075, -73.5535], 15);
+    var loop = [
+      [45.5062351, -73.5596853],
+      [45.5045254, -73.5561204],
+      [45.5078753, -73.5533705],
+      [45.5089192, -73.5543325],
+      [45.5089549, -73.5514907],
+      [45.5087444, -73.5488449],
+      [45.5100913, -73.556422]
+    ];
+    L.polyline(loop, { color: '#2E7D6B', weight: 3, dashArray: '2 10' }).addTo(m3);
+    numberedStop(m3, loop[0], 'IN', "Place-d'Armes metro (start)", true);
+    numberedStop(m3, loop[1], '1', 'Stop 1 — Notre-Dame Basilica');
+    numberedStop(m3, loop[2], '2', 'Stop 2 — Place Jacques-Cartier');
+    numberedStop(m3, loop[3], '3', 'Stop 3 — Montreal City Hall');
+    numberedStop(m3, loop[4], '4', 'Stop 4 — Bonsecours Market');
+    numberedStop(m3, loop[5], '5', 'Stop 5 — Grande Roue / Old Port');
+    numberedStop(m3, loop[6], 'OUT', 'Champ-de-Mars metro (return)', true);
+  }
+
+  // ---- Tuesday: home -> Biodome via metro ----
+  if (document.getElementById('map-biodome')) {
+    var m4 = makeMap('map-biodome', [45.540, -73.565], 12);
+    var route4 = [
+      [45.520939, -73.581296],
+      [45.5245931, -73.5816611],
+      [45.5152, -73.5605],
+      [45.5611957, -73.5472297],
+      [45.55958, -73.549874]
+    ];
+    L.polyline(route4, { color: '#1E8A5B', weight: 3, dashArray: '2 10' }).addTo(m4);
+    dot(m4, route4[0], '#1F3A54', '<strong>Home</strong>', 10);
+    dot(m4, route4[1], '#D9622B', 'Mont-Royal Metro (Orange)');
+    dot(m4, route4[2], '#1F3A54', 'Berri-UQAM (transfer to Green)');
+    dot(m4, route4[3], '#1E8A5B', 'Viau Metro');
+    dot(m4, route4[4], '#D65B4A', '<strong>Biodôme</strong>');
+  }
+
+  // ---- Wednesday: home -> Jean-Drapeau / Beach via metro + shuttle ----
+  if (document.getElementById('map-jeandrapeau')) {
+    var m5 = makeMap('map-jeandrapeau', [45.512, -73.480], 11);
+    var route5 = [
+      [45.520939, -73.581296],
+      [45.5245931, -73.5816611],
+      [45.5152, -73.5605],
+      [45.5124464, -73.5330319],
+      [45.4985211, -73.5229356]
+    ];
+    L.polyline(route5, { color: '#E0B400', weight: 3, dashArray: '2 10' }).addTo(m5);
+    dot(m5, route5[0], '#1F3A54', '<strong>Home</strong>', 10);
+    dot(m5, route5[1], '#D9622B', 'Mont-Royal Metro (Orange)');
+    dot(m5, route5[2], '#1F3A54', 'Berri-UQAM (transfer to Yellow)');
+    dot(m5, route5[3], '#E0B400', 'Jean-Drapeau Metro');
+    dot(m5, route5[4], '#D65B4A', '<strong>Jean-Doré Beach</strong><br>free shuttle from metro');
+  }
+
+});
+</script>
+</body>
+</html>
